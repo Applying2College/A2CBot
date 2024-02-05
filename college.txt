@@ -1,0 +1,248 @@
+Princeton
+Columbia
+Harvard
+MIT
+Yale
+School doesn't exist
+University of Chicago
+UPenn
+CalTech
+Duke
+JHU
+Northwestern
+Dartmouth
+Brown
+Vanderbilt
+WashU in St. Louis
+Cornell
+Rice
+Notre Dame
+UCLA
+Emory
+UC Berkeley
+Georgetown
+UMich
+Carnegie Mellon
+UVA
+USC
+NYU
+Tufts
+UC Santa Barbara
+UF
+UNC Chapel Hill
+Wake Forest
+UC San Diego
+URochester
+Boston College
+UC Irvine
+Georgia Tech
+UC Davis
+UT Austin
+William & Mary
+Boston University
+Brandeis
+Case Western Reserve
+Tulane
+UW Madison
+UIUC
+UGeorgia
+Lehigh
+Northeastern
+OSU Columbus
+Pepperdine
+Purdue
+Villanova
+Florida State
+RPI
+Santa Clara University
+University of Miami
+Syracuse
+University of Maryland
+University of Pittsburgh
+UWash in Seattle
+George Washington
+Penn State
+Rutgers
+UConn
+WPI
+Fordham
+IU Bloomington
+SMU
+Texas A&M
+UMass Amherst
+UMinnesota Twin Cities
+Yeshiva
+Baylor
+Clemson
+Loyola Marymount
+Virginia Tech
+American University
+Brigham Young
+Gonzaga
+North Carolina State
+Binghamton
+Colorado School of Mines
+Elon University
+Howard University
+Marquette University
+Michigan State University
+Stevens Institute
+Texas Christian
+UC Riverside
+University of Iowa
+Stony Brook University
+University at Buffalo
+UC Merced
+University of Delaware
+University of Denver
+University of San Diego
+Auburn University
+UColorado Boulder
+University of Oregon
+University of Utah
+Clark University
+Creighton University
+Drexel University
+Loyola Chicago
+Miami University
+NJIT
+Saint Louis University
+Temple University
+University of Arizona
+UC Santa Cruz
+UI Chicago
+U of San Francisco
+U of South Florida
+University of Tennessee
+Arizona State University
+RIT
+SUNY-ESF
+U of South Carolina
+University of Vermont
+Chapman University
+IIT
+Iowa State University
+University of Kansas
+University of Missouri
+Clarkson University
+DePaul University
+Gallaudet University
+Rutgers in Newark
+Seattle University
+Seton Hall University
+University of Dayton
+University of Kentucky
+University of Oklahoma
+Catholic University
+Drake University
+The New School
+Samford University
+Simmons University
+University of La Verne
+University of Nebraska
+U of New Hampshire
+University of St. Thomas
+UT Dallas
+University of the Pacific
+University of Tulsa
+Colorado State University
+CUNY City College
+Duquesne University
+George Mason University
+Michigan Technological
+Quinnipiac University
+Rutgers in Camden
+San Diego State
+Thomas Jefferson
+University of Alabama
+UAlabama in Birmingham
+U of Central Florida
+University of Cincinnati
+University of Mississippi
+Belmont University
+Florida International
+Hofstra University
+Kansas State University
+Mercer University
+Oregon State University
+University of Arkansas
+University of Hawaii
+UMaryland in Baltimore
+U of Rhode Island
+Adelphi University
+Chatham University
+Louisiana State
+St. John's University
+University at Albany
+Valparaiso University
+Virginia Commonwealth
+Missouri S&T
+Montclair State
+Ohio University
+Rowan University
+University of Houston
+University of Idaho
+UMass Lowell
+Washington State
+Oklahoma State University
+Pacific University
+Robert Morris University
+St. John Fisher College
+Union University
+U of Detroit Mercy
+University of Louisville
+UNC Wilmington
+U of Saint Joseph
+Biola University
+IUPUI
+Mississippi State
+Towson University
+University of New Mexico
+University of Wyoming
+Ball State University
+Bellarmine University
+Bethel University
+Florida A&M University
+Hampton University
+Illinois State University
+Loyola New Orleans
+Maryville University
+Misericordia University
+Sacred Heart University
+CSU Fresno
+East Carolina University
+George Fox University
+Kent State University
+Lipscomb University
+Nova Southeastern
+Pace University
+Texas Tech University
+Touro College
+University of Hartford
+University of Maine
+Western New England
+Widener University
+Wilkes University
+Gannon University
+Immaculata University
+New Mexico State
+Regis University
+Russell Sage College
+Seattle Pacific
+St. Catherine University
+U of Colorado Denver
+UMass Boston
+UMass Dartmouth
+U of Nevada Reno
+UNC Charlotte
+Central Michigan
+Clarke University
+Edgewood College
+Georgia State University
+Oklahoma City University
+UNC Greensboro
+University of Indianapolis
+UMissouri St. Louis
+University of South Dakota
+Bowling Green State
+Harding University
