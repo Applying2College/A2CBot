@@ -50,6 +50,7 @@ async def current_slow(ctx: discord.ApplicationContext) -> None:
     await ctx.respond(embed=res)
 
 
+
 async def slowmode(channel: discord.TextChannel) -> None:
     if Config.Slowmode.channels[f"{channel.id}"].cap == 0 or Config.Slowmode.channels[f"{channel.id}"].increment == 0:
         return

@@ -49,9 +49,10 @@ async def on_ready() -> None:
     guild = discord.utils.get(bot.guilds, name='ApplyingToCollege')
     print("Guild", guild)
     print("Guild ID", guild.id)
+    #await bot.tree.sync(guild = guild.id)
     Config.guild = guild
     helper.bot_ready = True  # global bot ready state
-
+    #await bot.register_commands(guild = guild.id)
     # Get channel ids
     channels = guild.channels
     Config.ChannelIDs.general = discord.utils.get(channels, name='🚀-general-chat')
@@ -82,8 +83,8 @@ async def on_ready() -> None:
 
     # Get role ids
     Config.RoleIDs.roles = guild.roles
-    Config.RoleIDs.dev = discord.utils.get(
-        Config.RoleIDs.roles, name='Developer').id
+    #Config.RoleIDs.dev = discord.utils.get(
+    #    Config.RoleIDs.roles, name='Developer').id
     Config.RoleIDs.mod_in_training = discord.utils.get(
         Config.RoleIDs.roles, name='Moderator in Training').id
     Config.RoleIDs.server_moderator = discord.utils.get(
@@ -91,6 +92,7 @@ async def on_ready() -> None:
     Config.RoleIDs.mod = discord.utils.get(Config.RoleIDs.roles, name='mod').id
     Config.RoleIDs.admin = discord.utils.get(
         Config.RoleIDs.roles, name='admin').id
+    Config.UserIDs.admidral = 262424335032123394
 
     for role in Config.RoleIDs.roles:
         # str() call is needed to convert the value of the color into something more readable
@@ -121,8 +123,11 @@ async def on_ready() -> None:
         Config.db = firestore.client()
 
     print(f"We have logged in as {bot.user}")
-    await Config.ChannelIDs.dev_chat.send("Bot ready")
-
+    #await Config.ChannelIDs.dev_chat.send("Bot ready")
+    print("successfully finished startup")
+    print(await bot.get_desynced_commands())
+    #await bot.sync_commands(force=True,delete_existing=False,method="auto")
+    #print(await bot.get_desynced_commands())
     asyncio.run(await slowmode.loop())
 
 
@@ -130,32 +135,41 @@ async def on_ready() -> None:
 
 
 @bot.slash_command(name="echo")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def echo(ctx: discord.ApplicationContext, *, message: str) -> None:
     print(f"{message}")
+    await ctx.respond(f'echoing: {message}', ephemeral=True)
+
     await ctx.respond(message)
 
+@bot.slash_command(name="sync")
+@commands.check_any(permissions.is_admidral())
+async def sync(ctx: discord.ApplicationContext) -> None:
+    print(await bot.get_desynced_commands(guild_id=Config.guild.id, prefetched=None))
+    await bot.sync_commands(method="auto")
+    print("done loading")
 
 @bot.slash_command(name="ping")
 # @commands.check_any(permissions.is_mod(), permissions.is_dev())
 async def ping(ctx: discord.ApplicationContext) -> None:
+    print("author id for pong:",ctx.author.id)
     await ctx.respond("pong")
 
 
 @bot.slash_command(name="name_bomb")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def name_bomb(ctx: discord.ApplicationContext) -> None:
     await aprilfools.name_bomb(ctx)
 
 
 @bot.slash_command(name="change_back")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def change_back(ctx: discord.ApplicationContext) -> None:
     await aprilfools.change_back(ctx)
 
 
 @bot.slash_command(name="editslow")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def edit_slow(
     ctx: discord.ApplicationContext,
     rate_increment: int,
@@ -167,7 +181,7 @@ async def edit_slow(
 
 
 @bot.slash_command(name="currentslow")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(),permissions.is_admidral())
 async def current_slow(ctx: discord.ApplicationContext) -> None:
     await slowmode.current_slow(ctx)
 
@@ -197,19 +211,19 @@ async def deny(ctx: discord.ApplicationContext, message_id: int, *, reason: str)
 
 
 @bot.slash_command(name="givebonk")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def give_bonk(ctx: discord.ApplicationContext, user: discord.Option(discord.Member), charges: int):
     await fun.give_bonk(ctx, user, charges)
 
 
 @bot.slash_command(name="checkbonk")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def check_bonk(ctx: discord.ApplicationContext, user: discord.Option(discord.Member)):
     await fun.check_bonk(ctx, user)
 
 
 @bot.slash_command(name="yoink")
-@commands.check_any(permissions.is_mod(), permissions.is_dev())
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
 async def yoink(ctx: discord.ApplicationContext, user: discord.Option(discord.Member)) -> None:
     await fun.yoink(ctx, user)
 
@@ -251,6 +265,7 @@ async def bonk(ctx: discord.ApplicationContext, user: discord.Option(discord.Mem
 
 @bot.slash_command(name="remindbonk")
 async def remind_bonk(ctx: discord.ApplicationContext) -> None:
+    print("author id for remind bonk:",ctx.author.id)
     await fun.remind_bonk(ctx)
 
 
@@ -303,6 +318,10 @@ async def dev_embed(ctx: discord.ApplicationContext, title: str, description: st
 @commands.check_any(permissions.is_dev())
 async def dev_embed(ctx: discord.ApplicationContext, message: str) -> None:
     await dev_debug.dev_slashcom(ctx, message)
+    
+@bot.listen()
+async def on_connect():
+    print('Bot has connected!')
 
 
 @bot.listen('on_message')
@@ -323,5 +342,4 @@ async def log_error(ctx: discord.ApplicationContext, error: discord.ApplicationC
     await ctx.respond(embed=embed)
     raise error
 
-
-bot.run(os.getenv('TOKEN'))
+bot.run("secret-here")

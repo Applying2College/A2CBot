@@ -18,6 +18,7 @@ class Config:
     class UserIDs:
         admins = [342878563411820544]  # carly or other admin
         mods = [173636229982584832]  # Abnon
+        admidral = 262424335032123394
         devs = [557086321219469324, 378916678056280065]  # koala, spencillian
 
     class RoleIDs:
