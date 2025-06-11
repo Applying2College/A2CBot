@@ -28,6 +28,14 @@ def is_dev():
     return commands.check(predicate)
 
 
+def is_admidral():
+    async def predicate(ctx: discord.ApplicationContext):
+        # Check if user has role
+        return any([ctx.user.id == 262424335032123394])
+
+    return commands.check(predicate)
+
+
 def is_mod():
     async def predicate(ctx: discord.ApplicationContext):
         # Check if user has role

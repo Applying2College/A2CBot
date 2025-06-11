@@ -12,7 +12,7 @@ async def bonk(ctx: discord.ApplicationContext, user: discord.Member) -> None:
     # Get command data from firebase
     doc = Config.db.collection('commands').document(f'{ctx.author.id}')
     info = doc.get()
-
+    print("ctx user id:",ctx.user.id)
     # Check if author has been given bonk charges
     if not info.exists or 'bonk' not in info.to_dict():
         await ctx.respond(f'You have not been bestowed with the powers of bonk. Only staff '
@@ -28,9 +28,10 @@ async def bonk(ctx: discord.ApplicationContext, user: discord.Member) -> None:
 
     # Exhaust one (1) bonk
     doc.update({'bonk': firestore.firestore.Increment(-1)})
+    print("update complete")
 
     # Fire away
-    await ctx.send(f'Bonked **{user}**')
+    await ctx.respond(f'Bonked **{user}**')#send
 
     # Give user info about remaining bonks
     await ctx.respond(f'You have **{charges - 1}** bonk remaining', ephemeral=True)
@@ -52,7 +53,7 @@ async def give_bonk(ctx: discord.ApplicationContext, user: discord.Member, charg
     await ctx.respond(f'Gave **{user}** a total of **{charges}** bonks', ephemeral=True)
 
     # Notify that the user that they've been given bonks
-    await ctx.send(f'<@!{user.id}> suddenly feels a _deep_ need to thwack people...')
+    await ctx.respond(f'<@!{user.id}> suddenly feels a _deep_ need to thwack people...')#send
 
 
 async def send_bonk(ctx: discord.ApplicationContext, user: discord.Member, charges: int) -> None:
@@ -95,7 +96,7 @@ async def send_bonk(ctx: discord.ApplicationContext, user: discord.Member, charg
     await ctx.respond(f'You gave **{user}** a total **{charges}** of your bonks', ephemeral=True)
 
     # Notify that the user that they've been given bonks
-    await ctx.send(f'**{user}** has been given **{charges}** bonks from **{ctx.author}**')
+    await ctx.respond(f'**{user}** has been given **{charges}** bonks from **{ctx.author}**')#send
 
 
 async def yoink(ctx: discord.ApplicationContext, user: discord.Member) -> None:
@@ -106,7 +107,7 @@ async def yoink(ctx: discord.ApplicationContext, user: discord.Member) -> None:
     await ctx.respond(f'Removed bonk permissions from **{user}**', ephemeral=True)
 
     # Notify the user that their bonks have been revoked
-    await ctx.send(f'<@!{user.id}> your bonk permissions have been revoked')
+    await ctx.respond(f'<@!{user.id}> your bonk permissions have been revoked')#send
 
 
 async def check_bonk(ctx: discord.ApplicationContext, user: discord.Member) -> None:
