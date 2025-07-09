@@ -60,8 +60,11 @@ class Config:
             increment: int
             cap: int
             message_rate: float
+            apply_to_threads: bool = True
             last_messages: int = 0
-        channels = {}
+            threads_last_messages: dict[str, int] = {}
+            
+        channels: dict[str, ChannelConfig] = {}
 
     class Emojis:
         arrow_up = '⬆️'

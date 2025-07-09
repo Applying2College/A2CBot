@@ -175,9 +175,10 @@ async def edit_slow(
     rate_increment: int,
     slowmode_cap: int,
     message_rate: float,
-    channel: discord.Option(discord.TextChannel)
+    channel: discord.Option(discord.TextChannel),
+    apply_to_threads: bool = True,
 ) -> None:
-    await slowmode.edit_slowmode(ctx, rate_increment, slowmode_cap, message_rate, channel)
+    await slowmode.edit_slowmode(ctx, rate_increment, slowmode_cap, message_rate, channel, apply_to_threads)
 
 
 @bot.slash_command(name="currentslow")
