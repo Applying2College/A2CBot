@@ -1,6 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 import discord
 import google.cloud.firestore_v1.client
+from typing import Dict
 
 
 class Config:
@@ -62,9 +63,9 @@ class Config:
             message_rate: float
             apply_to_threads: bool = True
             last_messages: int = 0
-            threads_last_messages: dict[str, int] = {}
+            threads_last_messages: Dict[str, int] = field(default_factory=dict)
             
-        channels: dict[str, ChannelConfig] = {}
+        channels: Dict[str, ChannelConfig] = {}
 
     class Emojis:
         arrow_up = '⬆️'
