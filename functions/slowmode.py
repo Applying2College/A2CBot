@@ -33,7 +33,8 @@ async def edit_slowmode(
                   value=f"<#{channel.id}>\n"
                         f"Increment: {Config.Slowmode.channels[f'{channel.id}'].increment} | "
                         f"Cap: {Config.Slowmode.channels[f'{channel.id}'].cap} | "
-                        f"Message Rate: {Config.Slowmode.channels[f'{channel.id}'].message_rate} ")
+                        f"Message Rate: {Config.Slowmode.channels[f'{channel.id}'].message_rate} |"
+                        f"Apply to threads: {Config.Slowmode.channels[f'{channel.id}'].apply_to_threads}")
     await ctx.respond(embed=res)
 
 
@@ -45,7 +46,8 @@ async def current_slow(ctx: discord.ApplicationContext) -> None:
                       value=f"<#{key}>\n"
                             f"Increment: {Config.Slowmode.channels[key].increment} | "
                             f"Cap: {Config.Slowmode.channels[key].cap} | "
-                            f"Message Rate: {Config.Slowmode.channels[key].message_rate} ")
+                            f"Message Rate: {Config.Slowmode.channels[key].message_rate} |"
+                            f"Apply to threads: {Config.Slowmode.channels[key].apply_to_threads}")
     res.add_field(
         name="Note: ", value="To disable slowmode for a specific channel, set increment or cap to 0")
     await ctx.respond(embed=res)
@@ -53,22 +55,25 @@ async def current_slow(ctx: discord.ApplicationContext) -> None:
 
 
 async def slowmode(channel: discord.TextChannel) -> None:
-    if Config.Slowmode.channels[f"{channel.id}"].cap == 0 or Config.Slowmode.channels[f"{channel.id}"].increment == 0:
-        return
 
     slow_amount = 0
 
     if channel.type == discord.ChannelType.public_thread:
-        parent_channel_id = channel.parent_id
+        parent_channel_id = str(channel.parent_id)
+
+        if Config.Slowmode.channels[parent_channel_id].cap == 0 or Config.Slowmode.channels[parent_channel_id].increment == 0:
+            return
         if parent_channel_id in Config.Slowmode.channels and Config.Slowmode.channels[parent_channel_id].apply_to_threads:
-            Config.Slowmode.channels[parent_channel_id].threads_last_messages[channel.id] += 1
+            Config.Slowmode.channels[parent_channel_id].threads_last_messages[f"{channel.id}"] = Config.Slowmode.channels[parent_channel_id].threads_last_messages.get(f"{channel.id}", 0) + 1
             slow_amount = min(
-                (Config.Slowmode.channels[parent_channel_id].threads_last_messages[channel.id]
+                (Config.Slowmode.channels[parent_channel_id].threads_last_messages.get(f"{channel.id}", 0)
                  // Config.Slowmode.channels[parent_channel_id].message_rate)
                 * Config.Slowmode.channels[parent_channel_id].increment,
                 Config.Slowmode.channels[parent_channel_id].cap
             )
     else:
+        if Config.Slowmode.channels[f"{channel.id}"].cap == 0 or Config.Slowmode.channels[f"{channel.id}"].increment == 0:
+            return
         Config.Slowmode.channels[f"{channel.id}"].last_messages += 1
         slow_amount = min(
             (Config.Slowmode.channels[f"{channel.id}"].last_messages
@@ -76,7 +81,7 @@ async def slowmode(channel: discord.TextChannel) -> None:
             * Config.Slowmode.channels[f"{channel.id}"].increment,
             Config.Slowmode.channels[f"{channel.id}"].cap
         )
-
+    
     await channel.edit(slowmode_delay=slow_amount)
 
 
