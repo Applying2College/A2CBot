@@ -330,8 +330,7 @@ async def logging(msg: discord.Message) -> None:
     if msg.author == bot.user:
         return
 
-    print(msg.content)
-    if str(msg.channel.id) in Config.Slowmode.channels:
+    if str(msg.channel.id) in Config.Slowmode.channels or str(msg.channel.parent_id) in Config.Slowmode.channels:
         await slowmode.slowmode(msg.channel)
 
 
