@@ -77,7 +77,7 @@ async def on_ready() -> None:
         916104906065207346)  # This channel ID is the main A2C one
 
     Config.Slowmode.channels[f"{Config.ChannelIDs.general.id}"] = Config.Slowmode.ChannelConfig(
-        3, 9, 2.0)
+        4, 12, 1.25)
     # Config.Slowmode.channels[f"{Config.ChannelIDs.college_talk.id}"] = Config.Slowmode.ChannelConfig(
     #     3, 9, 2.0)
 
