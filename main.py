@@ -175,9 +175,10 @@ async def edit_slow(
     rate_increment: int,
     slowmode_cap: int,
     message_rate: float,
-    channel: discord.Option(discord.TextChannel)
+    channel: discord.Option(discord.TextChannel),
+    apply_to_threads: bool = True,
 ) -> None:
-    await slowmode.edit_slowmode(ctx, rate_increment, slowmode_cap, message_rate, channel)
+    await slowmode.edit_slowmode(ctx, rate_increment, slowmode_cap, message_rate, channel, apply_to_threads)
 
 
 @bot.slash_command(name="currentslow")
@@ -329,8 +330,8 @@ async def logging(msg: discord.Message) -> None:
     if msg.author == bot.user:
         return
 
-    print(msg.content)
-    if str(msg.channel.id) in Config.Slowmode.channels:
+    if str(msg.channel.id) in Config.Slowmode.channels or \
+        (isinstance(msg.channel, discord.Thread) and str(msg.channel.parent_id) in Config.Slowmode.channels):
         await slowmode.slowmode(msg.channel)
 
 
