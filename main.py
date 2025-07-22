@@ -180,6 +180,17 @@ async def edit_slow(
 ) -> None:
     await slowmode.edit_slowmode(ctx, rate_increment, slowmode_cap, message_rate, channel, apply_to_threads)
 
+@bot.slash_command(name="editslowthread")
+@commands.check_any(permissions.is_mod(), permissions.is_dev(), permissions.is_admidral())
+async def edit_slow_thread(
+    ctx: discord.ApplicationContext,
+    rate_increment: int,
+    slowmode_cap: int,
+    message_rate: float,
+    channel: discord.Option(discord.Thread),
+) -> None:
+    await slowmode.edit_slowmode_thread(ctx, rate_increment, slowmode_cap, message_rate, channel)
+
 
 @bot.slash_command(name="currentslow")
 @commands.check_any(permissions.is_mod(), permissions.is_dev(),permissions.is_admidral())
