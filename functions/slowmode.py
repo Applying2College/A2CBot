@@ -75,11 +75,11 @@ async def current_slow(ctx: discord.ApplicationContext) -> None:
                             f"Message Rate: {Config.Slowmode.channels[key].message_rate} |"
                             f"Apply to threads: {Config.Slowmode.channels[key].apply_to_threads}")
     for key in Config.Slowmode.threads:
-        res.add_field(name=f"Edited Thread:",
+        res.add_field(name=f"Thread:",
                       value=f"<#{key}>\n"
-                            f"Increment: {Config.Slowmode.channels[f'{key}'].increment} | "
-                            f"Cap: {Config.Slowmode.channels[f'{key}'].cap} | "
-                            f"Message Rate: {Config.Slowmode.channels[f'{key}'].message_rate}")
+                            f"Increment: {Config.Slowmode.threads[f'{key}'].increment} | "
+                            f"Cap: {Config.Slowmode.threads[f'{key}'].cap} | "
+                            f"Message Rate: {Config.Slowmode.threads[f'{key}'].message_rate}")
     res.add_field(
         name="Note: ", value="To disable slowmode for a specific channel, set increment or cap to 0")
     await ctx.respond(embed=res)
