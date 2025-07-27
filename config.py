@@ -66,6 +66,7 @@ class Config:
             threads_last_messages: Dict[str, int] = field(default_factory=dict)
             
         channels: Dict[str, ChannelConfig] = {}
+        threads: Dict[str, ChannelConfig] = {}
 
     class Emojis:
         arrow_up = '⬆️'
